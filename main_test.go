@@ -50,16 +50,18 @@ func TestGetCachedUrl(t *testing.T) {
 func TestGetNotCachedUrl(t *testing.T) {
 	defer gock.Off()
 
+	htmlBody := "<!DOCTYPE html>"
+
 	gock.New("https://1.1.1.1/").
 		Get("/").
 		Reply(200).
-		BodyString("<!DOCTYPE html>")
+		BodyString(htmlBody)
 
 	var ctx = context.TODO()
 	redis, mock := redismock.NewClientMock()
 
 	mock.MatchExpectationsInOrder(true)
-	mock.ExpectSet("dfa8ce7471028ee0addb32f80fa8ecdcd7e112cf:data", "<!DOCTYPE html>", time.Duration(3600)*time.Second)
+	mock.ExpectSet("dfa8ce7471028ee0addb32f80fa8ecdcd7e112cf:data", htmlBody, time.Duration(3600)*time.Second)
 
 	r := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(r)
@@ -71,7 +73,7 @@ func TestGetNotCachedUrl(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, r.Code)
 	assert.Equal(t, gin.MIMEPlain, r.Header().Get("Content-Type"))
-	assert.Contains(t, r.Body.String(), "<!DOCTYPE html>")
+	assert.Contains(t, r.Body.String(), htmlBody)
 	assert.True(t, gock.IsDone())
 	mock.ExpectationsWereMet()
 }
