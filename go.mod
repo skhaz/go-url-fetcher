@@ -8,6 +8,7 @@ require (
 	github.com/go-redis/redismock/v8 v8.0.6
 	github.com/stretchr/testify v1.8.0
 	go.uber.org/automaxprocs v1.5.1
+	gopkg.in/h2non/gock.v1 v1.1.2
 	schneider.vip/problem v1.6.0
 )
 
@@ -20,6 +21,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/h2non/parth v0.0.0-20190131123155-b4df798d6542 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
