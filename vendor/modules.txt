@@ -10,6 +10,9 @@ github.com/dgryski/go-rendezvous
 # github.com/gin-contrib/sse v0.1.0
 ## explicit; go 1.12
 github.com/gin-contrib/sse
+# github.com/gin-contrib/zap v0.0.2
+## explicit; go 1.16
+github.com/gin-contrib/zap
 # github.com/gin-gonic/gin v1.8.1
 ## explicit; go 1.18
 github.com/gin-gonic/gin

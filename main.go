@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	_ "go.uber.org/automaxprocs"
@@ -112,6 +113,8 @@ func main() {
 
 	router := gin.Default()
 
+	router.Use(ginzap.Ginzap(logger, time.RFC3339, true))
+	router.Use(ginzap.RecoveryWithZap(logger, true))
 	router.Use(func(c *gin.Context) {
 		c.Set("Context", &ctx)
 		c.Set("Logger", logger)
