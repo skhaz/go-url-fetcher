@@ -10,13 +10,18 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redismock/v8"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/zap"
 	"gopkg.in/h2non/gock.v1"
 )
 
 func TestGetNoParameters(t *testing.T) {
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+
 	r := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(r)
 	c.Request, _ = http.NewRequest("GET", "/", nil)
+	c.Set("Logger", logger)
 
 	Fetch(c)
 
@@ -26,6 +31,9 @@ func TestGetNoParameters(t *testing.T) {
 }
 
 func TestGetCachedUrl(t *testing.T) {
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+
 	var ctx = context.TODO()
 	redis, mock := redismock.NewClientMock()
 
@@ -35,7 +43,8 @@ func TestGetCachedUrl(t *testing.T) {
 	r := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(r)
 	c.Request, _ = http.NewRequest("GET", "/?url=https://1.1.1.1/", nil)
-	c.Set("Context", ctx)
+	c.Set("Context", &ctx)
+	c.Set("Logger", logger)
 	c.Set("Redis", redis)
 
 	Fetch(c)
@@ -49,6 +58,9 @@ func TestGetCachedUrl(t *testing.T) {
 
 func TestGetNotCachedUrl(t *testing.T) {
 	defer gock.Off()
+
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
 
 	htmlBody := "<!DOCTYPE html>"
 
@@ -66,7 +78,8 @@ func TestGetNotCachedUrl(t *testing.T) {
 	r := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(r)
 	c.Request, _ = http.NewRequest("GET", "/?url=https://1.1.1.1/", nil)
-	c.Set("Context", ctx)
+	c.Set("Context", &ctx)
+	c.Set("Logger", logger)
 	c.Set("Redis", redis)
 
 	Fetch(c)

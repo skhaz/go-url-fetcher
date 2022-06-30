@@ -1,0 +1,15 @@
+mode: set
+github.com/skhaz/go-url-fetcher/main.go:24.28,28.39 3 1
+github.com/skhaz/go-url-fetcher/main.go:39.2,48.20 8 1
+github.com/skhaz/go-url-fetcher/main.go:80.2,82.8 3 1
+github.com/skhaz/go-url-fetcher/main.go:28.39,37.3 2 1
+github.com/skhaz/go-url-fetcher/main.go:48.20,52.17 3 1
+github.com/skhaz/go-url-fetcher/main.go:63.3,66.17 3 1
+github.com/skhaz/go-url-fetcher/main.go:77.3,77.71 1 1
+github.com/skhaz/go-url-fetcher/main.go:52.17,61.4 2 0
+github.com/skhaz/go-url-fetcher/main.go:66.17,75.4 2 0
+github.com/skhaz/go-url-fetcher/main.go:85.13,90.44 4 0
+github.com/skhaz/go-url-fetcher/main.go:94.2,96.34 2 0
+github.com/skhaz/go-url-fetcher/main.go:102.2,104.14 2 0
+github.com/skhaz/go-url-fetcher/main.go:90.44,91.13 1 0
+github.com/skhaz/go-url-fetcher/main.go:96.34,100.3 3 0
