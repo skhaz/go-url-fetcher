@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gin-contrib/zap"
+	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	_ "go.uber.org/automaxprocs"
@@ -94,7 +94,7 @@ func Fetch(c *gin.Context) {
 		rdb.Set(*ctx, dataKey, body, time.Duration(q.Expiration)*time.Second)
 	}
 
-	c.Writer.Header().Set("Cache-Control", "public, max-age=86400, immutable")
+	c.Writer.Header().Set("Cache-Control", fmt.Sprintf("public, max-age=%v, immutable", q.Expiration))
 	c.Data(http.StatusOK, gin.MIMEPlain, body)
 	return
 }
